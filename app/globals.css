@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #12121a;
+  --bg-glass: rgba(255, 255, 255, 0.04);
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --text-primary: #f0f0f5;
+  --text-secondary: #a0a0b0;
+  --accent: #8b5cf6;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.glass-card {
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-glass);
+  border-radius: 1rem;
+}
+
+.glow-accent {
+  box-shadow: 0 0 40px -10px var(--accent);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.75rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary { background: var(--accent); color: white; }
+.btn-primary:hover { opacity: 0.9; }
+
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  border: 1px solid var(--border-glass);
+}
+.btn-ghost:hover { background: rgba(255, 255, 255, 0.1); }
+
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  color: var(--text-primary);
+  outline: none;
+}
+.input:focus { border-color: var(--accent); }
+
+.tab {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--text-secondary);
+  border: none;
+  cursor: pointer;
+}
+
+.tab-active {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background: var(--accent);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+[data-accent="violet"] { --accent: #8b5cf6; }
+[data-accent="fuchsia"] { --accent: #d946ef; }
+[data-accent="cyan"] { --accent: #06b6d4; }
+[data-accent="emerald"] { --accent: #10b981; }
+[data-accent="amber"] { --accent: #f59e0b; }
+[data-accent="rose"] { --accent: #f43f5e; }
+[data-accent="blue"] { --accent: #3b82f6; }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-secondary); }
+::-webkit-scrollbar-thumb { background: var(--border-glass); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
