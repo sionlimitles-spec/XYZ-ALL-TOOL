@@ -10,13 +10,13 @@ export async function POST(req: Request) {
   try {
     // TikTok
     if (u.includes("tiktok.com")) {
-      const { tikfav } = await import("tikfav");
-      const data: any = await tikfav(url);
+      const { download } = await import("@silent-tech-offc/ttdl");
+      const data = await download(url);
       return Response.json({
         success: true,
         platform: "tiktok",
         title: data.title ?? "TikTok Video",
-        video: data.video,
+        video: data.video ?? data.no_watermark,
         music: data.music,
       });
     }
@@ -46,27 +46,13 @@ export async function POST(req: Request) {
       });
     }
 
-    // Platform generic
-    const aio = await import("@lmna22/aio-downloader");
-    const anyAio: any = aio;
-    const fn = anyAio.aioDownload ?? anyAio.default;
-    if (fn) {
-      const data: any = await fn(url);
-      return Response.json({
-        success: true,
-        platform: "generic",
-        title: data.title ?? "Media",
-        video: data.url ?? data.video,
-      });
-    }
-
     return Response.json(
-      { success: false, error: "Platform tidak didukung" },
+      { success: false, error: "Platform belum didukung. Coba TikTok atau YouTube." },
       { status: 400 }
     );
   } catch (err: any) {
     return Response.json(
-      { success: false, error: err?.message ?? "Gagal" },
+      { success: false, error: err?.message ?? "Gagal memproses URL" },
       { status: 500 }
     );
   }
