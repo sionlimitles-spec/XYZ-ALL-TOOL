@@ -8,20 +8,28 @@ export async function POST(req: Request) {
   const u = url.toLowerCase();
 
   try {
-    // TikTok
+    // TikTok — pakai API publik tikwm.com
     if (u.includes("tiktok.com")) {
-      const { download } = await import("@silent-tech-offc/ttdl");
-      const data = await download(url);
+      const res = await fetch("https://www.tikwm.com/api/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `url=${encodeURIComponent(url)}&hd=1`,
+      });
+      const json = await res.json();
+      if (json.code !== 0) {
+        throw new Error(json.msg || "Gagal ambil data TikTok");
+      }
       return Response.json({
         success: true,
         platform: "tiktok",
-        title: data.title ?? "TikTok Video",
-        video: data.video ?? data.no_watermark,
-        music: data.music,
+        title: json.data.title ?? "TikTok Video",
+        video: `https://www.tikwm.com${json.data.hdplay || json.data.play}`,
+        music: `https://www.tikwm.com${json.data.music}`,
+        thumbnail: `https://www.tikwm.com${json.data.cover}`,
       });
     }
 
-    // YouTube
+    // YouTube — pakai @distube/ytdl-core
     if (u.includes("youtube.com") || u.includes("youtu.be")) {
       const ytdl = (await import("@distube/ytdl-core")).default;
       const info = await ytdl.getInfo(url);
@@ -47,7 +55,10 @@ export async function POST(req: Request) {
     }
 
     return Response.json(
-      { success: false, error: "Platform belum didukung. Coba TikTok atau YouTube." },
+      {
+        success: false,
+        error: "Platform belum didukung. Coba TikTok atau YouTube.",
+      },
       { status: 400 }
     );
   } catch (err: any) {
