@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0a0a0f;
+  --glass: rgba(255, 255, 255, 0.04);
+  --border: rgba(255, 255, 255, 0.08);
+  --text: #f0f0f5;
+  --sub: #a0a0b0;
+  --accent: #8b5cf6;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-family: system-ui, sans-serif;
+}
+
+.glass-card {
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+}
+
+.glow-accent { box-shadow: 0 0 40px -10px var(--accent); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+
+.btn-primary { background: var(--accent); color: white; }
+.btn-primary:hover { opacity: 0.9; }
+
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  color: var(--text);
+  outline: none;
+}
+.input:focus { border-color: var(--accent); }
+
+.tab {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--sub);
+  border: none;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+
+.tab-active {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background: var(--accent);
+  color: white;
+  border: none;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+
+[data-accent="violet"] { --accent: #8b5cf6; }
+[data-accent="fuchsia"] { --accent: #d946ef; }
+[data-accent="cyan"] { --accent: #06b6d4; }
+[data-accent="emerald"] { --accent: #10b981; }
+[data-accent="amber"] { --accent: #f59e0b; }
+[data-accent="rose"] { --accent: #f43f5e; }
+[data-accent="blue"] { --accent: #3b82f6; }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
