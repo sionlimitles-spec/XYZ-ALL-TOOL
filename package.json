@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "@distube/ytdl-core": "^4.16.11",
-    "@silent-tech-offc/ttdl": "^1.0.0",
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.45.4",
     "lucide-react": "^0.454.0",
